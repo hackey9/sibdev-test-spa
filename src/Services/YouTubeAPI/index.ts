@@ -5,7 +5,7 @@ const ep = process.env.REACT_APP_YOUTUBE_API_ENDPOINT as string
 const key = process.env.REACT_APP_YOUTUBE_API_KEY as string
 
 const API = {
-  search: async (query: string, count: number, signal?: AbortSignal): Promise<SearchApiResult> => {
+  search: async (query: string, count: number, order: Order = "relevance", signal?: AbortSignal): Promise<SearchApiResult> => {
 
     if (count === 0) return {count: 0, total: 0, ids: []}
     if (count > 50) throw new Error("Requested count of data cannot be {$gt: 50}")
@@ -16,6 +16,7 @@ const API = {
       q: query,
       type: "video",
       maxResults: count.toString(),
+      order,
     })
     const response = await fetch(ep + "search?" + body.toString(), {signal})
     const json = await response.json()
@@ -120,3 +121,5 @@ export type VideoApiResult = {
     imageUrl: string
   }>
 }
+
+export type Order = "date" | "rating" | "relevance" | "title" | "viewCount"

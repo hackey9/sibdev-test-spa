@@ -60,4 +60,17 @@ describe("test /search+videos", () => {
 
     expect(typeof videos.videos[25].viewCount).toBe("number")
   })
+
+  it("find with order by view count", async () => {
+    const q = "чем кормить кота"
+    const count = 50
+    const order = "viewCount"
+
+    const items = await API.search(q, count, order)
+    const videos = await API.video(items.ids)
+
+    expect(videos.count).toBe(50)
+    expect(videos.videos[0].viewCount).toBeGreaterThanOrEqual(videos.videos[1].viewCount)
+    expect(videos.videos[20].viewCount).toBeGreaterThanOrEqual(videos.videos[30].viewCount)
+  })
 })
