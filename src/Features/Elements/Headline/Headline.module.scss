@@ -1,0 +1,14 @@
+.headline {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 52px;
+
+  color: #000000;
+
+  &.level2 {
+    font-size: 28px;
+    line-height: 40px;
+  }
+}
