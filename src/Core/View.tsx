@@ -1,11 +1,11 @@
-import LoginPage from "Features/Pages/LoginPage"
+import SearchPage from "Features/Pages/SearchPage"
 import React, {FC} from "react"
 
 
 const View: FC = () => {
 
   return (
-    <LoginPage/>
+    <SearchPage/>
   )
 }
 export default View
