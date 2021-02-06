@@ -1,0 +1,32 @@
+.button {
+  background: #1390e5;
+  border-radius: 5px;
+
+  height: 52px;
+  line-height: 52px;
+
+  text-align: center;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  color: #fff;
+
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 40px;
+
+  cursor: pointer;
+
+
+  &.secondary {
+    background-color: white;
+    border: 1px solid #1390e5;
+    color: #1390e5;
+  }
+
+  &.disabled {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,66 @@
+.layout {
+  display: grid;
+
+  grid-template:
+    "logo"      auto
+    "."         32px
+    "title"     auto
+    "."         20px
+    "username"  auto
+    "."         20px
+    "password"  auto
+    "."         40px
+    "button"    auto
+    / 1fr;
+
+  justify-items: center;
+
+  > .sibdevLogo {
+    grid-area: logo;
+
+    width: 88px;
+    height: 88px;
+
+    background-image: url("./SibdevLogo.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-origin: content-box;
+  }
+
+  > .formTitle {
+    grid-area: title;
+
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+
+    text-align: center;
+
+    color: #000;
+  }
+
+  > .inputContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+
+    justify-self: stretch;
+  }
+
+  > .inputUsername,
+  > .inputPassword {
+    height: 70px;
+  }
+
+  > .inputUsername {grid-area: username}
+
+  > .inputPassword {grid-area: password}
+
+  > .button {
+    grid-area: button;
+  }
+}

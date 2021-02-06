@@ -1,0 +1,74 @@
+.label {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: rgba(23, 23, 25, 0.3);
+
+  &.error {
+    color: rgb(232, 84, 70);
+  }
+}
+
+.inputWrapper {
+  height: 48px;
+  border: 1px solid rgba(23, 23, 25, 0.2);
+  border-radius: 5px;
+
+  &:focus-within { // when input will focused
+    background: rgba(197, 228, 249, 0.3);
+    border: 1px solid #1390e5;
+  }
+
+  > input {
+    height: 100%;
+    width: 100%;
+
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+
+    color: #272727;
+
+    padding: 0 15px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    // remove system eye
+    &::-ms-reveal, &::-ms-clear {
+      display: none;
+    }
+
+    &.withEyePadding {
+      padding-right: calc(15px + 24px + 10px)
+    }
+  }
+
+  > .eye {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+
+    // TODO: i should configure webpack
+    //  to inject inline, `base64`-d images here.
+
+    background-image: url("./eye-off.inline.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-origin: content-box;
+
+    &.eyeActive {
+      background-image: url("./eye-on.inline.svg");
+    }
+  }
+}
