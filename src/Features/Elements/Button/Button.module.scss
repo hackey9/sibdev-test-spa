@@ -29,4 +29,19 @@
     opacity: 0.2;
     pointer-events: none;
   }
+
+  &.appendRight {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &.appendLeft {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &.appendBoth {
+    border-radius: 0;
+  }
+
 }

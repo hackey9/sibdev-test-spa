@@ -8,16 +8,24 @@ export type ButtonProps = PropsWithChildren<{
   secondary?: boolean
   onClick?: () => void
   children?: string
+  appendTo?: "right" | "left" | "both"
 }>
 
-const Button: FC<ButtonProps> = ({children, disabled, secondary, onClick}) => {
+const Button: FC<ButtonProps> = ({children, disabled, secondary, onClick, appendTo}) => {
 
   const handleClick = useCallback(() => {
     onClick?.()
   }, [onClick])
 
   return (
-    <div className={clsx(css.button, {[css.disabled]: disabled, [css.secondary]: secondary})} onClick={handleClick}>
+    <div
+      className={clsx(css.button, {
+        [css.disabled]: disabled,
+        [css.secondary]: secondary,
+        [css.appendRight]: appendTo === "right",
+      })}
+      onClick={handleClick}
+    >
       {children}
     </div>
   )

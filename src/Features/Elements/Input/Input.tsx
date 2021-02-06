@@ -8,9 +8,11 @@ export type InputProps = PropsWithChildren<{
   onChange: (value: string) => void
   password?: boolean
   disabled?: boolean
+  appendAt?: "left" | "right" | "both"
+  placeholder?: string
 }>
 
-const Input: FC<InputProps> = ({password, value, onChange, disabled}) => {
+const Input: FC<InputProps> = ({password, value, onChange, disabled, children, appendAt, placeholder}) => {
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
     !disabled && onChange?.(e.target.value)
@@ -19,17 +21,23 @@ const Input: FC<InputProps> = ({password, value, onChange, disabled}) => {
   const [protect, invertProtect] = useReducer((protect: boolean) => !protect, Boolean(password))
 
   return (
-    <div className={css.inputWrapper}>
+    <div className={clsx(css.inputWrapper, {
+      [css.appendRight]: appendAt === "right",
+      [css.appendLeft]: appendAt === "left",
+      [css.appendBoth]: appendAt === "both",
+    })}>
       <input
         type={protect ? "password" : "text"}
         value={value}
         onChange={handleChange}
         className={clsx({[css.withEyePadding]: password})}
         disabled={disabled}
+        placeholder={placeholder}
       />
       {password && (
         <div className={clsx(css.eye, {[css.eyeActive]: protect})} onClick={invertProtect}/>
       )}
+      {children}
     </div>
   )
 }

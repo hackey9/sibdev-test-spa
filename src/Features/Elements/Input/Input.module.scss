@@ -13,13 +13,33 @@
 }
 
 .inputWrapper {
-  height: 48px;
+  height: 52px;
   border: 1px solid rgba(23, 23, 25, 0.2);
   border-radius: 5px;
 
   &:focus-within { // when input will focused
     background: rgba(197, 228, 249, 0.3);
     border: 1px solid #1390e5;
+  }
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  &.appendRight {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &.appendLeft {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &.appendBoth {
+    border-radius: 0;
   }
 
   > input {
