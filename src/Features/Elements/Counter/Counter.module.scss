@@ -1,0 +1,86 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+
+  column-gap: 20px;
+
+  > input {
+    flex-shrink: 0;
+    width: 100px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+
+    border: 1px solid rgba(23, 23, 25, 0.2);
+    box-sizing: border-box;
+    border-radius: 5px;
+    outline: none;
+
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    color: #272727;
+  }
+
+  > .slider {
+    cursor: pointer;
+
+    align-self: stretch;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > .lineAll {
+      @extend .line;
+      width: 100%;
+      background: rgba(23, 23, 25, 0.3);
+      opacity: 0.3;
+    }
+
+    > .lineFill {
+      @extend .line;
+      width: 0;
+      background-color: rgba(19, 144, 229, 0.8);
+
+
+      > .circle {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%) translateX(50%);
+
+        width: 18px;
+        height: 18px;
+
+        background: #FFFFFF;
+
+        border: 2px solid #1390E5;
+        box-sizing: border-box;
+        border-radius: 9px;
+      }
+    }
+  }
+}
+
+
+.line {
+  position: absolute;
+  left: 0;
+  height: 6px;
+
+  pointer-events: none;
+
+  border-radius: 3px;
+}

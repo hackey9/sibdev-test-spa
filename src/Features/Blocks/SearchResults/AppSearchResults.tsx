@@ -7,7 +7,8 @@ import SearchWithFollowElement, {
 } from "Features/Blocks/SearchResults/Elements/SearchWithFollowElement"
 import VideoElement, {VideoContainer} from "Features/Blocks/SearchResults/Elements/VideoElement"
 import Headline from "Features/Elements/Headline/Headline"
-import React, {FC, PropsWithChildren, useState} from "react"
+import React, {FC, PropsWithChildren, useCallback, useState} from "react"
+import {useHistory} from "react-router"
 import {VideoApiResult} from "Services/YouTubeAPI"
 
 
@@ -16,11 +17,17 @@ export type AppSearchResultsProps = PropsWithChildren<{
   onSearch: SearchAsyncHandler
   onFollow: FollowHandler
   data?: VideoApiResult
+  followed?: boolean
 }>
 
-const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFollow, data}) => {
+const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFollow, data, followed}) => {
 
+  const history = useHistory()
   const [view, setView] = useState<ViewType>("list")
+
+  const handleFollowLink = useCallback(() => {
+    history.push("/follow/")
+  }, [history])
 
   return (
     <AppLayoutAdaptiveContainer>
@@ -28,7 +35,13 @@ const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFollow,
       <SearchLayoutElement
         header={<Headline level={2}>Поиск видео</Headline>}
         search={
-          <SearchWithFollowElement query={query} onSearch={onSearch} onFollow={onFollow}/>
+          <SearchWithFollowElement
+            query={query}
+            onSearch={onSearch}
+            onFollow={onFollow}
+            followed={followed}
+            onGoFollow={handleFollowLink}
+          />
         }
         info={
           <SearchInfoElement
@@ -52,7 +65,7 @@ const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFollow,
             ))}
           </VideoContainer>
         ) : (
-          <>Nothing to show</>
+          <>TODO: Nothing to show || loading </>
         )}
 
       </SearchLayoutElement>

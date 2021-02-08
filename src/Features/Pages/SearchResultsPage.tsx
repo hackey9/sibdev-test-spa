@@ -1,10 +1,12 @@
 import AppHeader from "Features/Blocks/Header/AppHeader"
 import AppLayout from "Features/Blocks/Layouts/AppLayout"
+import SaveRequestModal, {SaveHandler} from "Features/Blocks/Modal/SaveRequestModal"
 import AppSearchResults, {SearchAsyncHandler} from "Features/Blocks/SearchResults/AppSearchResults"
 import React, {FC, useCallback, useEffect, useState} from "react"
 import {RouteComponentProps, useHistory, useParams} from "react-router"
 import API from "Services"
 import {Order, VideoApiResult} from "Services/YouTubeAPI"
+import delay from "Utils/delay"
 
 
 const SearchResultsPage: FC<RouteComponentProps> = () => {
@@ -29,17 +31,40 @@ const SearchResultsPage: FC<RouteComponentProps> = () => {
   }, [count, order, query])
 
 
-  const handleFollow = useCallback(() => {
 
+  const [modal, setModal] = useState(false)
+  const [followed, setFollowed] = useState(false)
+
+  useEffect(() => {
+    setFollowed(false)
+  }, [query, order, count])
+
+  const handleFollow = useCallback(() => {
+    !followed && setModal(true)
+  }, [followed])
+
+  const handleSave: SaveHandler = useCallback(async (_, query, title, sort, count) => {
+
+    // TODO: implement API
+
+    setModal(false)
+    await delay(400)
+    setFollowed(true)
+  }, [])
+
+  const handleCancel = useCallback(() => {
+    setModal(false)
   }, [])
 
   return (
     <AppLayout header={<AppHeader page={"search"}/>}>
-      <AppSearchResults onSearch={handleSearch} onFollow={handleFollow} query={query} data={data}/>
+      <AppSearchResults onSearch={handleSearch} onFollow={handleFollow} query={query} data={data} followed={followed}/>
+      {modal && <SaveRequestModal query={query} count={count} onSave={handleSave} onCancel={handleCancel}/>}
     </AppLayout>
   )
 }
 export default SearchResultsPage
+
 
 function useThisPageParams() {
   const {query, count, order} = useParams<{ query: string, count: string, order: string }>()

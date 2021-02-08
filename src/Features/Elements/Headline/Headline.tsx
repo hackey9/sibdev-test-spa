@@ -4,16 +4,13 @@ import css from "./Headline.module.scss"
 
 
 export type HeadlineProps = PropsWithChildren<{
-  children?: string
-  level?: 1 | 2
+  level?: 1 | 2 | 3
 }>
 
 const Headline: FC<HeadlineProps> = ({children, level}) => {
 
   return (
-    <div className={clsx(css.headline, {
-      [css.level2]: level === 2,
-    })}>
+    <div className={clsx(css.headline, css[`level${level}`])}>
       {children}
     </div>
   )

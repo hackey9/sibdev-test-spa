@@ -1,3 +1,4 @@
+import TooltipElement from "Features/Blocks/SearchResults/Elements/TooltipElement"
 import Icon from "Features/Elements/Icons/Icon"
 import Search from "Features/Elements/Search/Search"
 import React, {FC, PropsWithChildren, useCallback, useState} from "react"
@@ -8,19 +9,26 @@ export type SearchWithFollowElementProps = PropsWithChildren<{
   onSearch: SearchAsyncHandler
   query: string
   onFollow: FollowHandler
+  followed?: boolean
+  onGoFollow?: () => void
 }>
 
-const SearchWithFollowElement: FC<SearchWithFollowElementProps> = ({onSearch, query}) => {
+const SearchWithFollowElement: FC<SearchWithFollowElementProps> = ({onSearch, query, onFollow, followed, onGoFollow}) => {
 
   const [text, setText] = useState(query)
   const [loading, setLoading] = useState(false)
 
   const handleSearch = useCallback(() => {
     if (!loading) {
+
+      let shouldUpdateState = true
+
       setLoading(true)
       onSearch(text).finally(() => {
-        setLoading(false)
+        shouldUpdateState && setLoading(false)
       })
+
+      return () => void (shouldUpdateState = false)
     }
   }, [loading, onSearch, text])
 
@@ -33,7 +41,10 @@ const SearchWithFollowElement: FC<SearchWithFollowElementProps> = ({onSearch, qu
       disabled={loading}
     >
       <div className={css.rectForIcon}>
-        <Icon type={"follow"}/>
+        <Icon type={"follow"} active={followed} onClick={onFollow}/>
+        {followed && (
+          <TooltipElement onClick={onGoFollow}/>
+        )}
       </div>
     </Search>
   )

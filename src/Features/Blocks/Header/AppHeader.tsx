@@ -6,6 +6,7 @@ import SibdevLogoElement from "Features/Blocks/Header/Elements/SibdevLogoElement
 import {AppLayoutAdaptiveContainer} from "Features/Blocks/Layouts/Elements/AppContainerElement"
 import React, {FC, PropsWithChildren, useCallback} from "react"
 import {useDispatch} from "react-redux"
+import {useHistory} from "react-router"
 import {Redirect} from "react-router-dom"
 import {logoutAsync} from "Store/Auth"
 
@@ -16,6 +17,7 @@ export type AppHeaderProps = PropsWithChildren<{
 
 const AppHeader: FC<AppHeaderProps> = ({page}) => {
 
+  const history = useHistory()
   const authState = useIsAuthorized()
   const dispatch = useDispatch()
 
@@ -26,6 +28,15 @@ const AppHeader: FC<AppHeaderProps> = ({page}) => {
   const isSearch = page === "search"
   const isFollow = page === "follow"
 
+
+  const goFollow = useCallback(() => {
+    history.push("/follow/")
+  }, [history])
+
+  const goSearch = useCallback(() => {
+    history.push("/search/")
+  }, [history])
+
   if (authState === "anonymous") {
     return <Redirect to={"/login"}/>
   }
@@ -34,6 +45,7 @@ const AppHeader: FC<AppHeaderProps> = ({page}) => {
     return null
   }
 
+
   return (
     <HeaderWrapperElement>
       <AppLayoutAdaptiveContainer>
@@ -41,8 +53,8 @@ const AppHeader: FC<AppHeaderProps> = ({page}) => {
         <HeaderContainerElement>
           <SibdevLogoElement/>
           <HeaderNavContainer type={"nav"}>
-            <HeaderNavItem active={isSearch}>Поиск</HeaderNavItem>
-            <HeaderNavItem active={isFollow}>Избранное</HeaderNavItem>
+            <HeaderNavItem onClick={goSearch} active={isSearch}>Поиск</HeaderNavItem>
+            <HeaderNavItem onClick={goFollow} active={isFollow}>Избранное</HeaderNavItem>
           </HeaderNavContainer>
           <HeaderNavContainer type={"userpanel"}>
             <HeaderNavItem onClick={handleLogout}>Выйти</HeaderNavItem>
