@@ -5,15 +5,17 @@ import Search from "Features/Elements/Search/Search"
 import React, {FC, PropsWithChildren, useCallback, useState} from "react"
 
 
-export type AppSearchProps = PropsWithChildren<{}>
+export type AppSearchProps = PropsWithChildren<{
+  onSearch?: (query: string) => void
+}>
 
-const AppSearch: FC<AppSearchProps> = ({}) => {
+const AppSearch: FC<AppSearchProps> = ({onSearch}) => {
 
   const [text, setText] = useState("")
 
   const handleSearch = useCallback(() => {
-
-  }, [])
+    onSearch?.(text)
+  }, [onSearch, text])
 
   return (
     <AppLayoutAdaptiveContainer>

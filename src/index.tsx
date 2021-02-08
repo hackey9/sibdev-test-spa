@@ -2,12 +2,17 @@ import App from "Core/App"
 import React, {createElement, FC, StrictMode} from "react"
 import {render} from "react-dom"
 import {Provider} from "react-redux"
-import createStore from "Store/createStore"
+import API from "Services"
+import createStore from "Store"
+import {restoreSessionAsync} from "Store/Auth"
 import "./index.css"
 import reportWebVitals from "./reportWebVitals"
 
 
-const store = createStore()
+const store = createStore(API)
+
+store.dispatch(restoreSessionAsync())
+
 
 const Root: FC = () => (
   <StrictMode>

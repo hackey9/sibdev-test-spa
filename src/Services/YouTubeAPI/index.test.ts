@@ -1,4 +1,4 @@
-import API from "Services/YouTubeAPI/index"
+import API from "Services/index"
 
 
 describe("test /search", () => {
@@ -7,7 +7,7 @@ describe("test /search", () => {
     const count = 50
     const q = "чем кормить кота"
 
-    const items = await API.search(q, count)
+    const items = await API.youtube.search(q, count)
 
     expect(typeof items.count).toBe("number")
   }, 3000)
@@ -16,7 +16,7 @@ describe("test /search", () => {
     const count = 100000
     const q = "чем кормить кота"
 
-    const promise = API.search(q, count)
+    const promise = API.youtube.search(q, count)
 
     await expect(promise).rejects.toThrowError()
 
@@ -26,7 +26,7 @@ describe("test /search", () => {
     const count = 1
     const q = "чем кормить кота"
 
-    const items = await API.search(q, count)
+    const items = await API.youtube.search(q, count)
 
     expect(items.count).toBe(count)
   }, 3000)
@@ -35,7 +35,7 @@ describe("test /search", () => {
     const count = 0
     const q = "чем кормить кота"
 
-    const items = await API.search(q, count)
+    const items = await API.youtube.search(q, count)
 
     expect(items.count).toBe(0)
   }, 100)
@@ -44,7 +44,7 @@ describe("test /search", () => {
     const count = 25
     const q = String()
 
-    await expect(API.search(q, count)).rejects.toThrowError()
+    await expect(API.youtube.search(q, count)).rejects.toThrowError()
   })
 
 })
@@ -55,8 +55,8 @@ describe("test /search+videos", () => {
     const q = "чем кормить кота"
     const count = 50
 
-    const items = await API.search(q, count)
-    const videos = await API.video(items.ids)
+    const items = await API.youtube.search(q, count)
+    const videos = await API.youtube.video(items.ids)
 
     expect(typeof videos.videos[25].viewCount).toBe("number")
   })
@@ -66,8 +66,8 @@ describe("test /search+videos", () => {
     const count = 50
     const order = "viewCount"
 
-    const items = await API.search(q, count, order)
-    const videos = await API.video(items.ids)
+    const items = await API.youtube.search(q, count, order)
+    const videos = await API.youtube.video(items.ids)
 
     expect(videos.count).toBe(50)
     expect(videos.videos[0].viewCount).toBeGreaterThanOrEqual(videos.videos[1].viewCount)

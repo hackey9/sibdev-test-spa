@@ -26,10 +26,14 @@ const LoginForm: FC<LoginFormProps> = ({onLogin}) => {
 
   const handleClick = useCallback(() => {
     if (onLogin) {
+
       setLoading(true)
       onLogin(username, password).then(result => {
         result && setError(result)
       }).finally(() => {
+        // FIXME: we catch memory leak warning here
+        //  when login is success
+        //  because component will be unmounted by redux
         setLoading(false)
       })
     }

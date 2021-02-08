@@ -1,0 +1,76 @@
+.container {
+  display: grid;
+
+  padding: 40px 0;
+
+  grid-template:
+    "header" auto
+    "." 12px
+    "search" auto
+    "." 40px
+    "info" auto
+    "." 20px
+    "items" auto
+    / 1fr;
+
+  > .header { grid-area: header }
+
+  > .search { grid-area: search }
+
+  > .info { grid-area: info }
+
+  > .items { grid-area: items }
+}
+
+.rectForIcon {
+  width: 48px;
+  height: 48px;
+  align-self: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+
+.resultsInfo {
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+
+  .infoHead,
+  .infoCount {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+
+  }
+
+  .infoHead {
+    color: #000000;
+    margin-right: 15px;
+  }
+  .infoCount {
+    color: rgba(23, 23, 25, 0.3);
+    margin-right: auto;
+  }
+
+  .icons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    > * {
+      cursor: pointer;
+    }
+  }
+}
