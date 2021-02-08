@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import React, {FC, PropsWithChildren, useCallback} from "react"
+import React, {FC, MouseEventHandler, PropsWithChildren, useCallback} from "react"
 import css from "./Button.module.scss"
 
 
@@ -13,21 +13,23 @@ export type ButtonProps = PropsWithChildren<{
 
 const Button: FC<ButtonProps> = ({children, disabled, secondary, onClick, appendTo}) => {
 
-  const handleClick = useCallback(() => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback(e => {
+    e.preventDefault()
     onClick?.()
   }, [onClick])
 
   return (
-    <div
+    <button
       className={clsx(css.button, {
         [css.disabled]: disabled,
         [css.secondary]: secondary,
         [css.appendRight]: appendTo === "right",
       })}
       onClick={handleClick}
+      type={"submit"}
     >
       {children}
-    </div>
+    </button>
   )
 }
 export default Button

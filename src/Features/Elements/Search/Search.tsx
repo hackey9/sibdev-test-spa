@@ -15,7 +15,7 @@ export type SearchProps = PropsWithChildren<{
 const Search: FC<SearchProps> = ({children, placeholder, onClick, disabled, value, onChange}) => {
 
   return (
-    <div className={css.container}>
+    <form className={css.container}>
       <div className={css.frame}>
         <Input value={value} onChange={onChange} appendAt={"left"} placeholder={placeholder}>
           {children}
@@ -24,7 +24,7 @@ const Search: FC<SearchProps> = ({children, placeholder, onClick, disabled, valu
       <div className="button">
         <Button onClick={onClick} disabled={disabled} appendTo={"right"}>Найти</Button>
       </div>
-    </div>
+    </form>
   )
 }
 export default Search
