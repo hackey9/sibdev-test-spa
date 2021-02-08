@@ -3,7 +3,7 @@ import FormInputElement from "Features/Blocks/Auth/Elements/FormInputElement"
 import FormTitle from "Features/Blocks/Auth/Elements/FormTitle"
 import LoginFormLayoutElement from "Features/Blocks/Auth/Elements/LoginFormLayoutElement"
 import SibdevLogoElement from "Features/Blocks/Auth/Elements/SibdevLogoElement"
-import React, {FC, PropsWithChildren, useCallback, useEffect, useState} from "react"
+import React, {FC, PropsWithChildren, useCallback, useEffect, useRef, useState} from "react"
 
 
 export type LoginFormProps = PropsWithChildren<{
@@ -24,17 +24,19 @@ const LoginForm: FC<LoginFormProps> = ({onLogin}) => {
 
   useEffect(() => setError(null), [username, password])
 
+  const shouldUpdate = useRef(true) // dont touch xD
+  useEffect(() => () => void (shouldUpdate.current = false), [])
+
   const handleClick = useCallback(() => {
     if (onLogin) {
-
       setLoading(true)
       onLogin(username, password).then(result => {
-        result && setError(result)
+        result && shouldUpdate.current && setError(result)
       }).finally(() => {
-        // FIXME: we catch memory leak warning here
+        // we catch 'memory leak' warning here (fixed)
         //  when login is success
         //  because component will be unmounted by redux
-        setLoading(false)
+        shouldUpdate.current && setLoading(false)
       })
     }
   }, [onLogin, password, username])

@@ -10,7 +10,7 @@
   background-origin: content-box;
 
 
-  &.typeFollow {
+  &.typeFavorite {
     background-image: url("./Assets/heart-default.svg");
 
     &.active { background-image: url("./Assets/heart-active.svg") }

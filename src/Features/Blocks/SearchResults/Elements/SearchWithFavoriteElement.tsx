@@ -5,15 +5,15 @@ import React, {FC, PropsWithChildren, useCallback, useState} from "react"
 import css from "./SearchResults.module.scss"
 
 
-export type SearchWithFollowElementProps = PropsWithChildren<{
+export type SearchWithFavoriteElementProps = PropsWithChildren<{
   onSearch: SearchAsyncHandler
   query: string
-  onFollow: FollowHandler
-  followed?: boolean
-  onGoFollow?: () => void
+  onFavorite: FavoriteHandler
+  favorite?: boolean
+  onGoFavorite?: () => void
 }>
 
-const SearchWithFollowElement: FC<SearchWithFollowElementProps> = ({onSearch, query, onFollow, followed, onGoFollow}) => {
+const SearchWithFavoriteElement: FC<SearchWithFavoriteElementProps> = ({onSearch, query, onFavorite, favorite, onGoFavorite}) => {
 
   const [text, setText] = useState(query)
   const [loading, setLoading] = useState(false)
@@ -41,16 +41,16 @@ const SearchWithFollowElement: FC<SearchWithFollowElementProps> = ({onSearch, qu
       disabled={loading}
     >
       <div className={css.rectForIcon}>
-        <Icon type={"follow"} active={followed} onClick={onFollow}/>
-        {followed && (
-          <TooltipElement onClick={onGoFollow}/>
+        <Icon type={"favorite"} active={favorite} onClick={onFavorite}/>
+        {favorite && (
+          <TooltipElement onClick={onGoFavorite}/>
         )}
       </div>
     </Search>
   )
 }
-export default SearchWithFollowElement
+export default SearchWithFavoriteElement
 
 
 export type SearchAsyncHandler = (query: string) => Promise<any>
-export type FollowHandler = () => void
+export type FavoriteHandler = () => void

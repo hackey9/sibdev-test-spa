@@ -33,15 +33,15 @@ const SearchResultsPage: FC<RouteComponentProps> = () => {
 
 
   const [modal, setModal] = useState(false)
-  const [followed, setFollowed] = useState(false)
+  const [favorite, setFavorite] = useState(false)
 
   useEffect(() => {
-    setFollowed(false)
+    setFavorite(false)
   }, [query, order, count])
 
-  const handleFollow = useCallback(() => {
-    !followed && setModal(true)
-  }, [followed])
+  const handleFavorite = useCallback(() => {
+    !favorite && setModal(true)
+  }, [favorite])
 
   const handleSave: SaveHandler = useCallback(async (_, query, title, sort, count) => {
 
@@ -49,7 +49,7 @@ const SearchResultsPage: FC<RouteComponentProps> = () => {
 
     setModal(false)
     await delay(400)
-    setFollowed(true)
+    setFavorite(true)
   }, [])
 
   const handleCancel = useCallback(() => {
@@ -58,7 +58,7 @@ const SearchResultsPage: FC<RouteComponentProps> = () => {
 
   return (
     <AppLayout header={<AppHeader page={"search"}/>}>
-      <AppSearchResults onSearch={handleSearch} onFollow={handleFollow} query={query} data={data} followed={followed}/>
+      <AppSearchResults onSearch={handleSearch} onFavorite={handleFavorite} query={query} data={data} favorite={favorite}/>
       {modal && <SaveRequestModal query={query} count={count} onSave={handleSave} onCancel={handleCancel}/>}
     </AppLayout>
   )

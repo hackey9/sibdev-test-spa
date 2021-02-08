@@ -12,7 +12,7 @@ import {logoutAsync} from "Store/Auth"
 
 
 export type AppHeaderProps = PropsWithChildren<{
-  page?: "search" | "follow"
+  page?: "search" | "favorite"
 }>
 
 const AppHeader: FC<AppHeaderProps> = ({page}) => {
@@ -26,11 +26,11 @@ const AppHeader: FC<AppHeaderProps> = ({page}) => {
   }, [dispatch])
 
   const isSearch = page === "search"
-  const isFollow = page === "follow"
+  const isFavorite = page === "favorite"
 
 
-  const goFollow = useCallback(() => {
-    history.push("/follow/")
+  const goFavorite = useCallback(() => {
+    history.push("/favorite/")
   }, [history])
 
   const goSearch = useCallback(() => {
@@ -54,7 +54,7 @@ const AppHeader: FC<AppHeaderProps> = ({page}) => {
           <SibdevLogoElement/>
           <HeaderNavContainer type={"nav"}>
             <HeaderNavItem onClick={goSearch} active={isSearch}>Поиск</HeaderNavItem>
-            <HeaderNavItem onClick={goFollow} active={isFollow}>Избранное</HeaderNavItem>
+            <HeaderNavItem onClick={goFavorite} active={isFavorite}>Избранное</HeaderNavItem>
           </HeaderNavContainer>
           <HeaderNavContainer type={"userpanel"}>
             <HeaderNavItem onClick={handleLogout}>Выйти</HeaderNavItem>

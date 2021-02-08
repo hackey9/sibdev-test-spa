@@ -1,10 +1,10 @@
 import {AppLayoutAdaptiveContainer} from "Features/Blocks/Layouts/Elements/AppContainerElement"
 import SearchInfoElement, {ViewType} from "Features/Blocks/SearchResults/Elements/SearchInfoElement"
 import SearchLayoutElement from "Features/Blocks/SearchResults/Elements/SearchLayoutElement"
-import SearchWithFollowElement, {
-  FollowHandler,
+import SearchWithFavoriteElement, {
+  FavoriteHandler,
   SearchAsyncHandler,
-} from "Features/Blocks/SearchResults/Elements/SearchWithFollowElement"
+} from "Features/Blocks/SearchResults/Elements/SearchWithFavoriteElement"
 import VideoElement, {VideoContainer} from "Features/Blocks/SearchResults/Elements/VideoElement"
 import Headline from "Features/Elements/Headline/Headline"
 import React, {FC, PropsWithChildren, useCallback, useState} from "react"
@@ -15,18 +15,18 @@ import {VideoApiResult} from "Services/YouTubeAPI"
 export type AppSearchResultsProps = PropsWithChildren<{
   query: string
   onSearch: SearchAsyncHandler
-  onFollow: FollowHandler
+  onFavorite: FavoriteHandler
   data?: VideoApiResult
-  followed?: boolean
+  favorite?: boolean
 }>
 
-const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFollow, data, followed}) => {
+const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFavorite, data, favorite}) => {
 
   const history = useHistory()
   const [view, setView] = useState<ViewType>("list")
 
-  const handleFollowLink = useCallback(() => {
-    history.push("/follow/")
+  const handleFavoriteLink = useCallback(() => {
+    history.push("/favorite/")
   }, [history])
 
   return (
@@ -35,12 +35,12 @@ const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFollow,
       <SearchLayoutElement
         header={<Headline level={2}>Поиск видео</Headline>}
         search={
-          <SearchWithFollowElement
+          <SearchWithFavoriteElement
             query={query}
             onSearch={onSearch}
-            onFollow={onFollow}
-            followed={followed}
-            onGoFollow={handleFollowLink}
+            onFavorite={onFavorite}
+            favorite={favorite}
+            onGoFavorite={handleFavoriteLink}
           />
         }
         info={
@@ -64,9 +64,7 @@ const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFollow,
               />
             ))}
           </VideoContainer>
-        ) : (
-          <>TODO: Nothing to show || loading </>
-        )}
+        ) : null}
 
       </SearchLayoutElement>
 
@@ -75,4 +73,4 @@ const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFollow,
 }
 export default AppSearchResults
 
-export type {SearchAsyncHandler, FollowHandler} from "Features/Blocks/SearchResults/Elements/SearchWithFollowElement"
+export type {SearchAsyncHandler, FavoriteHandler} from "Features/Blocks/SearchResults/Elements/SearchWithFavoriteElement"

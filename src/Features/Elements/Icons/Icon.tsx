@@ -3,20 +3,20 @@ import React, {FC, PropsWithChildren} from "react"
 import css from "./Icon.module.scss"
 
 
-export type FollowIconProps = PropsWithChildren<{
-  type: "follow" | "grid" | "list",
+export type IconProps = PropsWithChildren<{
+  type: "favorite" | "grid" | "list",
   active?: boolean
   onClick?: () => void
 }>
 
-const Icon: FC<FollowIconProps> = ({type, active, onClick}) => {
+const Icon: FC<IconProps> = ({type, active, onClick}) => {
 
   return (
     <div
       onClick={onClick}
       className={clsx(css.icon, {
         [css.active]: active,
-        [css.typeFollow]: type === "follow",
+        [css.typeFavorite]: type === "favorite",
         [css.typeGrid]: type === "grid",
         [css.typeList]: type === "list",
       })}
