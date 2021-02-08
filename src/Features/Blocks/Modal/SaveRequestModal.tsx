@@ -16,7 +16,7 @@ import {Order} from "Services/YouTubeAPI"
 
 
 export type SaveRequestModalProps = PropsWithChildren<{
-  id?: number
+  id?: string
   query: string
   title?: string
   order?: Order
@@ -63,7 +63,7 @@ const SaveRequestModal: FC<SaveRequestModalProps> = (
     if (isLoading) {
       let shouldUpdateState = true // protect against "memory leak" warnings
 
-      onSave?.(id ?? 0, query, title, sort, count).finally(() => {
+      onSave?.(id ?? "", query, title, sort, count).finally(() => {
         shouldUpdateState && setIsLoading(false)
       })
 
@@ -112,4 +112,4 @@ const SaveRequestModal: FC<SaveRequestModalProps> = (
 export default SaveRequestModal
 
 
-export type SaveHandler = (id: number, query: string, title: string, sort: Order, count: number) => Promise<void>
+export type SaveHandler = (id: string, query: string, title: string, order: Order, count: number) => Promise<void>

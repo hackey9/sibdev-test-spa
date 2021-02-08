@@ -3,14 +3,16 @@ import AppLayout from "Features/Blocks/Layouts/AppLayout"
 import SaveRequestModal, {SaveHandler} from "Features/Blocks/Modal/SaveRequestModal"
 import AppSearchResults, {SearchAsyncHandler} from "Features/Blocks/SearchResults/AppSearchResults"
 import React, {FC, useCallback, useEffect, useState} from "react"
+import {useDispatch} from "react-redux"
 import {RouteComponentProps, useHistory, useParams} from "react-router"
 import API from "Services"
 import {Order, VideoApiResult} from "Services/YouTubeAPI"
-import delay from "Utils/delay"
+import {addOrUpdateAsync} from "Store/Favorites"
 
 
 const SearchResultsPage: FC<RouteComponentProps> = () => {
 
+  const dispatch = useDispatch()
   const history = useHistory()
   const {query, order, count} = useThisPageParams()
 
@@ -43,14 +45,11 @@ const SearchResultsPage: FC<RouteComponentProps> = () => {
     !favorite && setModal(true)
   }, [favorite])
 
-  const handleSave: SaveHandler = useCallback(async (_, query, title, sort, count) => {
-
-    // TODO: implement API
-
+  const handleSave: SaveHandler = useCallback(async (_, query, title, order, count) => {
     setModal(false)
-    await delay(400)
+    await dispatch(addOrUpdateAsync({query, title, count, order}))
     setFavorite(true)
-  }, [])
+  }, [dispatch])
 
   const handleCancel = useCallback(() => {
     setModal(false)

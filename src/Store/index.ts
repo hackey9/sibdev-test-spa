@@ -2,10 +2,12 @@ import {configureStore, getDefaultMiddleware} from "@reduxjs/toolkit"
 import {combineReducers} from "redux"
 import {Api} from "Services"
 import authReducer from "Store/Auth"
+import favoritesReducer from "Store/Favorites"
 
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  favorites: favoritesReducer,
 })
 export type RootState = ReturnType<typeof rootReducer>
 

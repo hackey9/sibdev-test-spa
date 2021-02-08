@@ -5,20 +5,21 @@ import AppLayout from "Features/Blocks/Layouts/AppLayout"
 import React, {FC, useCallback} from "react"
 import {useDispatch} from "react-redux"
 import {Redirect} from "react-router-dom"
-import {Order} from "Services/YouTubeAPI"
+import {Favorite} from "Services/BackendAPI/Favorites"
+import {addOrUpdateAsync, removeAsync} from "Store/Favorites"
 
 
 const FavoritePage: FC = () => {
 
   const dispatch = useDispatch()
 
-  const handleDelete = useCallback((id: number) => {
-    console.log({requested: "delete", id})
-  }, [])
+  const handleDelete = useCallback((id: string) => {
+    dispatch(removeAsync({id}))
+  }, [dispatch])
 
-  const handleChange = useCallback((id: number, newQuery: string, newTitle: string, newOrder: Order, newCount: number) => {
-    console.log({requested: "change", id})
-  }, [])
+  const handleChange = useCallback(async (favorite: Favorite) => {
+    await dispatch(addOrUpdateAsync(favorite))
+  }, [dispatch])
 
 
   const authState = useIsAuthorized()
@@ -33,7 +34,6 @@ const FavoritePage: FC = () => {
   return (
     <AppLayout header={<AppHeader page={"favorite"}/>}>
       <AppFavorite onDelete={handleDelete} onChange={handleChange}/>
-
     </AppLayout>
   )
 }
