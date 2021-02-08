@@ -6,12 +6,13 @@ import css from "./SearchResults.module.scss"
 
 export type SearchWithFollowElementProps = PropsWithChildren<{
   onSearch: SearchAsyncHandler
+  query: string
   onFollow: FollowHandler
 }>
 
-const SearchWithFollowElement: FC<SearchWithFollowElementProps> = ({onSearch}) => {
+const SearchWithFollowElement: FC<SearchWithFollowElementProps> = ({onSearch, query}) => {
 
-  const [text, setText] = useState("")
+  const [text, setText] = useState(query)
   const [loading, setLoading] = useState(false)
 
   const handleSearch = useCallback(() => {

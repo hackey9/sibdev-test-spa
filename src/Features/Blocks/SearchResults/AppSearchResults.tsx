@@ -28,7 +28,7 @@ const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFollow,
       <SearchLayoutElement
         header={<Headline level={2}>Поиск видео</Headline>}
         search={
-          <SearchWithFollowElement onSearch={onSearch} onFollow={onFollow}/>
+          <SearchWithFollowElement query={query} onSearch={onSearch} onFollow={onFollow}/>
         }
         info={
           <SearchInfoElement

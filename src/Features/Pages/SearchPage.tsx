@@ -1,24 +1,29 @@
+import {useIsAuthorized} from "Core/useIsAuthorized"
 import AppHeader from "Features/Blocks/Header/AppHeader"
 import AppLayout from "Features/Blocks/Layouts/AppLayout"
 import AppSearch from "Features/Blocks/Search/AppSearch"
 import React, {FC, useCallback} from "react"
-import {useSelector} from "react-redux"
 import {useHistory} from "react-router"
 import {Redirect} from "react-router-dom"
 
 
 const SearchPage: FC = () => {
 
-  const isAuthorized = useIsAuthorized()
+  const authState = useIsAuthorized()
 
   const history = useHistory()
 
   const handleSearch = useCallback(q => {
-    history.push("/search?" + new URLSearchParams({q}).toString())
+    const uri = `/search/${encodeURIComponent(q)}/12-by-relevance/`
+    history.push(uri)
   }, [history])
 
-  if (!isAuthorized) {
+  if (authState === "anonymous") {
     return <Redirect to={"/login"}/>
+  }
+
+  if (authState === "background") {
+    return null
   }
 
   return (
@@ -29,10 +34,3 @@ const SearchPage: FC = () => {
   )
 }
 export default SearchPage
-
-
-function useIsAuthorized() {
-  const user = useSelector(s => s.auth.data?.user)
-
-  return Boolean(user)
-}

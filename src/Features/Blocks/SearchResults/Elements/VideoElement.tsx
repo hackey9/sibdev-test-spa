@@ -16,7 +16,7 @@ const VideoElement: FC<VideoElementProps> = ({imageUrl, title, channel, playCoun
 
   return (
     <div className={css.item}>
-      <div className={css.image} style={{backgroundImage: `src("${imageUrl}")`}}/>
+      <div className={css.image} style={{backgroundImage: `url("${imageUrl}")`}}/>
       <div className={css.title}>{title}</div>
       <div className={css.data}>
         <span>{channel}</span>

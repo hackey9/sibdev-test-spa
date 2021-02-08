@@ -12,8 +12,8 @@ const View: FC = () => {
       <Switch>
         <Route exact strict path={"/"} render={() => <Redirect to={"/login"}/>}/>
         <Route exact strict path={"/login"} component={LoginPage}/>
-        <Route exact strict path={"/search"} component={SearchPage}/>
-        <Route exact strict path={"/search/:query/:count-by-:sort"} component={SearchResultsPage}/>
+        <Route exact strict path={"/search/"} component={SearchPage}/>
+        <Route exact strict path={"/search/:query/:count-by-:sort/"} component={SearchResultsPage}/>
         <Route render={() => <Redirect to={"/login"}/>}/>
       </Switch>
     </BrowserRouter>

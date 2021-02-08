@@ -15,7 +15,8 @@ const SearchResultsPage: FC<RouteComponentProps> = () => {
   const [data, setData] = useState<VideoApiResult>()
 
   const handleSearch: SearchAsyncHandler = useCallback(async query => {
-    history.push(`/search/${encodeURIComponent(query)}/12-by-relevance/`)
+    const uri = `/search/${encodeURIComponent(query)}/12-by-relevance/`
+    history.push(uri)
   }, [history])
 
   useEffect(() => {
