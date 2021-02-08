@@ -1,0 +1,64 @@
+.layout {
+  padding: 40px 0;
+
+  > .layoutHead {
+    margin-bottom: 40px;
+  }
+
+  > .layoutList {
+  }
+}
+
+
+.list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+
+  > .listItem {
+    height: 47px;
+    background-color: white;
+    border-bottom: 1px solid #f1f1f1;
+
+    &:hover {
+      background: #F1F1F1;
+      border-bottom: 1px solid white;
+    }
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    column-gap: 30px;
+    padding: 0 20px;
+
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+
+    .listItemTitle {
+      flex: 1;
+      font-weight: 500;
+      color: #000000;
+      font-size: 16px;
+    }
+
+    .listItemEdit {
+      color: #1390E5;
+    }
+
+    .listItemDelete {
+      color: #FF0000;
+    }
+
+    .listItemDelete,
+    .listItemEdit {
+      font-size: 14px;
+      line-height: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+}
