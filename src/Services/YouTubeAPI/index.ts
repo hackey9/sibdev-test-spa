@@ -96,13 +96,13 @@ function isYoutubeApiSearchResponse(json: any): json is YoutubeApiSearchResponse
   if (typeof json !== "object") return false
   if (!Array.isArray(json.items)) return false
 
-  doNothing() // ide try to change my code
+  doNothing() // ide try to join my returns
 
   return true
 }
 
 function isYoutubeApiVideosResponse(json: any): json is YoutubeApiVideosResponse {
-  return isYoutubeApiSearchResponse(json) // FIXME
+  return isYoutubeApiSearchResponse(json) // TODO checks are same, but this is wrong
 }
 
 export type SearchApiResult = {

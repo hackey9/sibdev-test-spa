@@ -9,7 +9,7 @@ import {loginAsync} from "Store/Auth"
 
 const LoginPage: FC = () => {
 
-  const authorized = useIsAuthorized()
+  const authState = useIsAuthorized()
 
   const dispatch = useDispatch()
 
@@ -26,8 +26,12 @@ const LoginPage: FC = () => {
     }
   }, [dispatch])
 
-  if (authorized) {
+  if (authState === "authorized") {
     return <Redirect to={"/search"}/>
+  }
+
+  if (authState === "background") {
+    return null
   }
 
   return (
@@ -39,9 +43,14 @@ const LoginPage: FC = () => {
 export default LoginPage
 
 
-function useIsAuthorized() {
+function useIsAuthorized(): "background" | "authorized" | "anonymous" {
 
-  const auth = useSelector(s => s.auth.data?.user)
+  const auth = useSelector(s => s.auth)
+  const isLoading = auth.loading
+  const hasToken = Boolean(auth.data?.token)
+  const isUser = Boolean(auth.data?.user)
 
-  return Boolean(auth)
+  if (isLoading && !isUser && hasToken) return "background"
+  if (hasToken && isUser) return "authorized"
+  return "anonymous"
 }
