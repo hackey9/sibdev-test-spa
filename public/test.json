@@ -1,0 +1,67 @@
+{
+  "b0g9bg8d": [
+    {
+      "id": "1",
+      "query": "123123123",
+      "order": "rating",
+      "count": 13,
+      "title": "12312"
+    },
+    {
+      "id": "2",
+      "query": "123123123",
+      "order": "rating",
+      "count": 13,
+      "title": "12312"
+    },
+    {
+      "id": "3",
+      "query": "123123123",
+      "order": "rating",
+      "count": 13,
+      "title": "12312"
+    },
+    {
+      "id": "4",
+      "query": "123123123",
+      "order": "rating",
+      "count": 13,
+      "title": "12312"
+    },
+    {
+      "id": "5",
+      "query": "123123123",
+      "order": "rating",
+      "count": 13,
+      "title": "12312"
+    },
+    {
+      "id": "6",
+      "query": "123123123",
+      "order": "rating",
+      "count": 13,
+      "title": "12312"
+    },
+    {
+      "id": "7",
+      "query": "123123123",
+      "order": "rating",
+      "count": 13,
+      "title": "12312"
+    },
+    {
+      "id": "8",
+      "query": "чем кормить кота",
+      "order": "relevance",
+      "count": 17,
+      "title": "чем кормить котов (3 шт)"
+    },
+    {
+      "id": "9",
+      "query": "чем кормить собак",
+      "order": "rating",
+      "count": 6,
+      "title": "а собак?"
+    }
+  ]
+}

@@ -10,9 +10,14 @@ export async function all(token: string): Promise<Favorite[]> {
 
 export async function remove(token: string, id: Favorite["id"]) {
   const user = await users.getByToken(token)
-  const items = internalGet()
+  let items = internalGet()
 
-  items[user.id] && items[user.id].filter(item => item.id !== id)
+  items = {
+    ...items,
+    [user.id]: items[user.id].filter(item => item.id !== id)
+  }
+
+  //items[user.id] = items[user.id].filter(item => item.id !== id)
   internalSet(items)
 }
 

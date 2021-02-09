@@ -52,7 +52,7 @@ const AppFavorite: FC<AppFavoriteProps> = ({onDelete, onChange}) => {
         <FavoriteLayoutList>
           {favorites && (
             <FavoriteContainer>
-              {favorites.map(({title, id, count, order, query}) => (
+              {favorites.map(({title, id, count, order, query}, index) => (
                 <FavoriteItem
                   title={title}
                   key={id}
@@ -62,6 +62,7 @@ const AppFavorite: FC<AppFavoriteProps> = ({onDelete, onChange}) => {
                   count={count}
                   order={order}
                   query={query}
+                  index={index}
                 />
               ))}
             </FavoriteContainer>
