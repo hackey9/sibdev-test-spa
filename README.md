@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# sibdev-test-spa
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Решение 2го тестового задания
+
+> #хочувсибдев =)
 
 ## Available Scripts
 
-In the project directory, you can run:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### `npm start`
+Всё как обычно:
 
-Runs the app in the development mode.\
+- `npm start` - запустит dev-server от react-scripts
+- `npm test` - протестирует работу API и что-то ещё
+- `npm run build` - создаст статическую сборку
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Логин: `admin`  
+Пароль: `admin`
 
-### `npm test`
+## Реализация
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Приложение работает 😅
+- До UI-библиотеки увы, так и не добрался. Написал элементы руками. 
+- Запросы выполняются через fetch (не `axios`). Однако, все запросы для большей абстракции вынесены в src/Services.
+- Для навигации использовал `react-router`. Результаты поиска, кстати, можно открыть по ссылке и скинуть другу.
+- Состояние приложения (авторизация и список избранного) хранитя в `redux`. *P.S.: Поиск видео реализован в стейте компонента*
+- Попробовал библиотеку [redux toolkit](https://redux-toolkit.js.org/). Прикольная, и очень гибкая). По производительности не знаю, но вроде нормас)
+- Список избранного хранится в `localStorage`. Пользователи лежат в [fakeUsers.ts](https://github.com/hackey9/sibdev-test-spa/blob/main/src/Services/BackendAPI/fakeUsers.ts)
+- Google API токен находится в [.env](https://github.com/hackey9/sibdev-test-spa/blob/main/.env). Github мне уже успел прислать сообщение о том что так делать не нужно =))
+- Лимиты на Youtube API чёт жосткие. API отваливается быстро, а восстанавливаются (вроде) каждый день в 12:00 МСК.
+- Пока API в отвале, добавил анимацию (библиотека [framer-motion](https://www.framer.com/motion/)) в список навигации.
+- Структура проекта оставляет желать лучшего. Я ещё неопытный в этом, но идеи как можно было бы улучшить, уже есть)
+- Вёрстка сделана на CSS modules. Знаком со `styled-components`, но тут не стал делать, и отлаживать их неудобно ))
