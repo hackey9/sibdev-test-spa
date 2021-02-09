@@ -33,14 +33,16 @@ describe("favorites test", function () {
     const order = "rating"
     const title = "чем кормить кота"
     const count = 40
+    const query = "чем кормить кота"
 
-    await API.backend.favorites.add(token, {count, order, title})
+    await API.backend.favorites.add(token, {count, order, title, query})
     const items = await API.backend.favorites.all(token)
 
     expect(items.length).toBe(1)
     expect(items[0].title).toBe(title)
     expect(items[0].count).toBe(count)
     expect(items[0].order).toBe(order)
+    expect(items[0].query).toBe(query)
     expect(typeof items[0].id).toBe("string")
   })
 })
