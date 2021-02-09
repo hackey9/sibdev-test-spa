@@ -1,5 +1,6 @@
 import clsx from "clsx"
 import {ViewType} from "Features/Blocks/SearchResults/Elements/SearchInfoElement"
+import {motion} from "framer-motion"
 import React, {FC, PropsWithChildren} from "react"
 import css from "./VideoElement.module.scss"
 
@@ -16,12 +17,12 @@ const VideoElement: FC<VideoElementProps> = ({imageUrl, title, channel, playCoun
 
   return (
     <div className={css.item}>
-      <div className={css.image} style={{backgroundImage: `url("${imageUrl}")`}}/>
-      <div className={css.title}>{title}</div>
-      <div className={css.data}>
+      <motion.div layout className={css.image} style={{backgroundImage: `url("${imageUrl}")`}}/>
+      <motion.div layout className={css.title}>{title}</motion.div>
+      <motion.div layout className={css.data}>
         <span>{channel}</span>
         <span>{playCount}</span>
-      </div>
+      </motion.div>
     </div>
   )
 }
