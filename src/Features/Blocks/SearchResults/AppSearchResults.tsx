@@ -18,9 +18,10 @@ export type AppSearchResultsProps = PropsWithChildren<{
   onFavorite: FavoriteHandler
   data?: VideoApiResult
   favorite?: boolean
+  error?: boolean
 }>
 
-const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFavorite, data, favorite}) => {
+const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFavorite, data, favorite, error}) => {
 
   const history = useHistory()
   const [view, setView] = useState<ViewType>("list")
@@ -44,7 +45,7 @@ const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFavorit
           />
         }
         info={
-          <SearchInfoElement
+          !error && <SearchInfoElement
             query={query}
             view={view}
             onChangeView={setView}
@@ -65,6 +66,10 @@ const AppSearchResults: FC<AppSearchResultsProps> = ({query, onSearch, onFavorit
             ))}
           </VideoContainer>
         ) : null}
+
+        {error && (
+          <>Youtube API is unavailable =(</>
+        )}
 
       </SearchLayoutElement>
 

@@ -1,4 +1,5 @@
 import clsx from "clsx"
+import {motion} from "framer-motion"
 import React, {FC, PropsWithChildren, useCallback} from "react"
 import css from "./Header.module.scss"
 
@@ -15,7 +16,13 @@ const HeaderNavItem: FC<HeaderNavElementsProps> = ({children, active, onClick}) 
   return (
     <div className={clsx(css.item)} onClick={handleClick}>
       {children}
-      {active && <div className={css.itemActiveLine}/>}
+      {active && (
+        <motion.div
+          className={css.itemActiveLine}
+          layout
+          layoutId={"header-active-line"}
+        />
+      )}
     </div>
   )
 }
