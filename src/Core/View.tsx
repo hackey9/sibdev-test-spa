@@ -10,8 +10,8 @@ import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom"
 const View: FC = () => {
 
   return (
-    <BrowserRouter>
-      <AnimateSharedLayout>
+    <AnimateSharedLayout type={"crossfade"}>
+      <BrowserRouter>
         <Switch>
           <Route exact strict path={"/"} render={() => <Redirect to={"/login"}/>}/>
           <Route exact strict path={"/login"} component={LoginPage}/>
@@ -20,9 +20,9 @@ const View: FC = () => {
           <Route exact strict path={"/favorite/"} component={FavoritePage}/>
           <Route render={() => <Redirect to={"/login"}/>}/>
         </Switch>
-      </AnimateSharedLayout>
 
-    </BrowserRouter>
+      </BrowserRouter>
+    </AnimateSharedLayout>
   )
 }
 export default View

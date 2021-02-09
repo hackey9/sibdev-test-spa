@@ -1,5 +1,5 @@
-import {AnimatePresence, motion, useIsPresent, Variants} from "framer-motion"
-import React, {FC, PropsWithChildren, useCallback, useEffect} from "react"
+import {AnimatePresence, motion, Variants} from "framer-motion"
+import React, {FC, PropsWithChildren, useCallback} from "react"
 import {useHistory} from "react-router"
 import {Order} from "Services/YouTubeAPI"
 import css from "./Favorite.module.scss"
@@ -20,10 +20,6 @@ const FavoriteItem: FC<FavoriteItemProps> = ({title, onChange, onDelete, id, cou
 
   const history = useHistory()
 
-  const isPresent = useIsPresent()
-
-  console.log({id, isPresent})
-
   const handleClick = useCallback(() => {
     history.push(`/search/${encodeURIComponent(query)}/${count}-by-${order}/`)
   }, [count, history, order, query])
@@ -41,10 +37,6 @@ export default FavoriteItem
 
 
 export const FavoriteContainer: FC = ({children}) => {
-  useEffect(() => {
-    console.log("mounted")
-  }, [])
-
   return (
     <motion.div className={css.list}>
       <AnimatePresence>
@@ -70,11 +62,9 @@ const variants: Variants = {
   exit: {
     opacity: 0,
     x: 40,
-
     transition: {
       mass: 2,
     },
-
     pointerEvents: "none",
   },
 }
