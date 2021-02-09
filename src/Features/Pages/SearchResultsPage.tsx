@@ -17,6 +17,8 @@ const SearchResultsPage: FC<RouteComponentProps> = () => {
   const {query, order, count} = useThisPageParams()
 
   const [data, setData] = useState<VideoApiResult>()
+  const [error, setError] = useState(false)
+
 
   const handleSearch: SearchAsyncHandler = useCallback(async query => {
     const uri = `/search/${encodeURIComponent(query)}/12-by-relevance/`
@@ -24,12 +26,14 @@ const SearchResultsPage: FC<RouteComponentProps> = () => {
   }, [history])
 
   useEffect(() => {
+    setError(false)
     setData(undefined)
     API.youtube.search(query, count, order).then(result => {
       API.youtube.video(result.ids).then(result => {
         setData(result)
-      })
-    })
+      }).catch(() => setError(true))
+    }).catch(() => setError(true))
+
   }, [count, order, query])
 
 
@@ -57,7 +61,14 @@ const SearchResultsPage: FC<RouteComponentProps> = () => {
 
   return (
     <AppLayout header={<AppHeader page={"search"}/>}>
-      <AppSearchResults onSearch={handleSearch} onFavorite={handleFavorite} query={query} data={data} favorite={favorite}/>
+      <AppSearchResults
+        onSearch={handleSearch}
+        onFavorite={handleFavorite}
+        query={query}
+        data={data}
+        favorite={favorite}
+        error={error}
+      />
       {modal && <SaveRequestModal query={query} count={count} onSave={handleSave} onCancel={handleCancel}/>}
     </AppLayout>
   )
